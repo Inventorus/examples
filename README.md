@@ -19,7 +19,8 @@ $client = new Inventorus\InventorusClient($yourApiKey);
 You can fetch applications from user's inventory.
 
 ```PHP
-$apps = $client->getUsersApps('76561198080641698');
+$steamid = '76561198080641698'; // SteamID64 representation
+$apps = $client->getUsersApps($steamid);
 foreach ($apps as $app) {
   echo 'User has app ' . $app->name;
 }
@@ -31,9 +32,12 @@ Either fetch items from applications you obtained previously, or request items f
 For example fetch CS:GO backpack.
 
 ```PHP
-$items = $client->getUsersItems('76561198080641698', 730, array(2));
+$steamid = '76561198080641698'; // SteamID64 representation
+$appid = 730; // CS:GO application id
+$contextids = [2]; // CS:GO backpack context
+$items = $client->getUsersItems($steamid, $appid, $contextids);
 foreach ($items as $item) {
-  echo 'User has item ' . $item->name;
+  echo 'User has item ' . $item->name . ' with assetid ' . $item->assetid;
 }
 ```
 
@@ -43,13 +47,13 @@ You need to create import trade to import items into your warehouse.
 
 ```PHP
 $import = new Inventorus\Models\ImportRequest;
-$import->steamid = '76561198080641698';
+$import->steamid = '76561198080641698'; // SteamID64 representation
 $import->tradeToken = 'x3CeVhts';
 $import->message = 'Hello person!';
 $item = new stdClass;
 $item->appid = 730;
 $item->contextid = 2;
-$item->assetid = '6144820778';
+$item->assetid = '6144820778'; // You can get assetid from fetching Steam items
 $import->items = array($item);
 $import->successUrl = 'http://myapplication.com/import-hooks/success';
 $import->failUrl = 'http://myapplication.com/import-hooks/fail';
@@ -85,10 +89,10 @@ Create export trade to move item out of your warehouse.
 
 ```PHP
 $export = new Inventorus\Models\ExportRequest;
-$export->steamid = '76561198080641698';
+$export->steamid = '76561198080641698'; // SteamID64 representation
 $export->tradeToken = 'x3CeVhts';
 $export->message = 'Hello person!';
-$export->items = array('d93518cc-9235-4828-8cdf-fd15bb19d3ce');
+$export->items = ['d93518cc-9235-4828-8cdf-fd15bb19d3ce']; // Use our item id for export
 $export->successUrl = 'http://myapplication.com/export-hooks/success';
 $export->failUrl = 'http://myapplication.com/export-hooks/fail';
 $export->updateUrl = 'http://myapplication.com/export-hooks/update';
