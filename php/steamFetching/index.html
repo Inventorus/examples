@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Steam fetching</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body>
+    <main>
+      <form>
+        <table>
+          <tbody>
+            <tr>
+              <td style="font-size: 12px;">SteamID</td>
+              <td>
+                <input type="text" id="steamid" placeholder="76561198080641698">
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <button type="button" onclick="fetchApps()">Fetch applications</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <div id="container">
+      </div>
+    </main>
+  </body>
+</html>
