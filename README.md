@@ -62,6 +62,16 @@ $importId = $client->createImport($import);
 echo 'Import with id ' . $importId . ' was created.';
 ```
 
+### Cancel import trade
+
+In case you need to stop unfinished import, you can cancel it.
+
+```PHP
+$id = 'dcc9d004-09cb-4432-87c6-b2af43402b1f';
+$client->cancelImport($id);
+echo 'Import with id ' . $id . ' was canceled.';
+```
+
 ### Get import history
 
 Use history to look at your created import trades.
